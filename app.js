@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const winston = require('winston');
+const port = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGODB_URL);
 mongoose.Promise = global.Promise;
@@ -23,6 +24,6 @@ app.get('/', (req, res) => {
   res.json({ message: 'It works!' });
 });
 
-app.listen(3000, () => {
-  console.log('running port 3000');
+app.listen(port, () => {
+  console.log(`running port ${port}`);
 });
