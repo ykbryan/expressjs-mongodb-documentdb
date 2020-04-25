@@ -1,0 +1,28 @@
+version: '2'
+services:
+  node:
+    image: 'node:13'
+    user: 'node'
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 3000:8081
+    command: 'npm start'
+    networks:
+      - app-network
+    links:
+      - mongodb
+
+  mongodb:
+    image: mongo:3.6
+    networks:
+      - app-network
+    ports:
+      - 27017:27017
+
+networks:
+  app-network:
+    driver: bridge
